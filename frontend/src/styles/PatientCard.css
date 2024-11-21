@@ -1,0 +1,21 @@
+.patient-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .patient-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .patient-card h3 {
+    margin: 0;
+  }
+  
+  .patient-card p {
+    margin: 4px 0;
+  }
+  
