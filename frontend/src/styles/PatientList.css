@@ -1,47 +1,110 @@
+/* General styling for the patient list page */
 .patient-list {
-  padding: 20px;
-  background-color: #f9f9f9;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .patient-list-header {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .patient-list-header h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 2em;
+  color: #2c3e50;
+}
+
+.upload-section {
+  display: flex;
+  align-items: center;
+}
+
+.file-input {
+  margin-right: 15px;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px;
+  background-color: #fff;
+}
+
+.upload-button {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  background-color: #3498db;
 }
 
 .patient-list-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 }
 
-.patient-list a {
-  display: inline-block;
-  margin: 10px 0;
-  padding: 10px 20px;
-  background-color: #007bff;
+.patient-list-cards .patient-card {
+  background-color: #ecf0f1;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.patient-list-cards .patient-card h3 {
+  font-size: 1.5em;
+  color: #34495e;
+}
+
+.patient-list-cards .patient-card p {
+  font-size: 1em;
+  color: #7f8c8d;
+}
+
+.patient-list-cards .patient-card button {
+  background-color: #2980b9;
   color: white;
-  text-decoration: none;
+  padding: 10px;
+  border: none;
   border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  font-size: 1em;
 }
 
-.patient-list a:hover {
-  background-color: #0056b3;
+.patient-list-cards .patient-card button:hover {
+  background-color: #3498db;
 }
 
-.patient-list a:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+/* Add some responsive behavior */
+@media (max-width: 768px) {
+  .patient-list {
+    margin: 10px;
+  }
+
+  .patient-list-header h1 {
+    font-size: 1.5em;
+  }
+
+  .file-input {
+    width: 200px;
+  }
+
+  .upload-button {
+    font-size: 1em;
+  }
+
+  .patient-list-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .patient-list-cards .patient-card {
+    padding: 12px;
+  }
 }

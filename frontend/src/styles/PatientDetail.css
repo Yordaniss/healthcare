@@ -1,0 +1,108 @@
+/* General styling for the patient detail page */
+.patient-detail {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .patient-detail h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .patient-detail p {
+    font-size: 1.1em;
+    color: #7f8c8d;
+    margin: 5px 0;
+  }
+  
+  .patient-detail p strong {
+    color: #34495e;
+  }
+  
+  .recommendations {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .recommendations h3,
+  .recommendations h4 {
+    color: #2980b9;
+    margin-top: 15px;
+  }
+  
+  .recommendations ol,
+  .recommendations ul {
+    list-style-position: inside;
+    margin-left: 20px;
+  }
+  
+  .recommendations li {
+    font-size: 1em;
+    color: #34495e;
+    margin-bottom: 5px;
+  }
+  
+  .recommendations li strong {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  .recommendation-content {
+    font-size: 1em;
+    line-height: 1.5;
+  }
+  
+  .recommendations ul li {
+    margin-bottom: 8px;
+  }
+  
+  .recommendations ol li {
+    margin-bottom: 8px;
+  }
+  
+  .note {
+    background-color: #f39c12;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 1.1em;
+  }
+  
+  .note strong {
+    color: white;
+  }
+  
+  /* Add some responsive behavior */
+  @media (max-width: 768px) {
+    .patient-detail {
+      margin: 10px;
+    }
+  
+    .patient-detail h2 {
+      font-size: 1.5em;
+    }
+  
+    .recommendations {
+      padding: 15px;
+    }
+  
+    .recommendations h3,
+    .recommendations h4 {
+      font-size: 1.2em;
+    }
+  
+    .recommendations li {
+      font-size: 0.9em;
+    }
+  
+    .note {
+      font-size: 1em;
+    }
+  }
+  
