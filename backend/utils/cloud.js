@@ -13,8 +13,14 @@ export const getRecommendations = async (symptoms) => {
         CLOUD_FLARE_URL,
         {
           messages: [
-            { role: 'system', content: 'You are a friendly assistant in medical hospital. Please provide just recommendations based on symptoms as direct answer for documentation' },
-            { role: 'user', content: symptoms },
+            { role: 'system', content: 
+              `You are a friendly assistant in medical hospital.`
+            },
+            { role: 'user', content: 
+              `Please provide recommendations based on symptoms ${symptoms} in following format:` +
+              `* {first recommendation` +
+              `* {second recommendation` +
+              `* ...`},
           ],
         },
         {

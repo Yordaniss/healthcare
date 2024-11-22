@@ -14,7 +14,7 @@ app.use(express.json());
 app.get('/recommendations', async (req, res) => {
   try {
     console.log('CALL')
-    const recommendations = await getRecommendations('persistent cough, occasional headaches');
+    const recommendations = await getRecommendations('fatigue, shortness of breath, mild fever');
     res.json({ recommendations });
   } catch (error) {
     console.error('Error fetching recommendations:', error.message);

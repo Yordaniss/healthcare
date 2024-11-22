@@ -3,56 +3,18 @@ import { useParams } from "react-router-dom";
 import "../styles/PatientDetail.css";
 
 function parseRecommendations(text) {
-  const parsedData = {};
-
-  const sections = text.split(
-    /(?=\*\*Possible causes:\*\*|\*\*Symptoms:\*\*|\*\*Recommended treatment:\*\*|\*\*Note:\*\*)/
-  );
-
-  sections.forEach((section) => {
-    if (section.startsWith("**Possible causes:**")) {
-      parsedData.possibleCauses = section
-        .replace("**Possible causes:**", "")
-        .split(/\*\*\d+\.\s*/)
-        .filter((cause) => cause.trim() !== "")
-        .map((cause) => cause.trim().replace(/^\*\*/, ""));
-    }
-
-    if (section.startsWith("**Symptoms:**")) {
-      parsedData.symptoms = section
-        .replace("**Symptoms:**", "")
-        .split(/[-•]/)
-        .filter((symptom) => symptom.trim() !== "")
-        .map((symptom) => symptom.trim());
-    }
-
-    if (section.startsWith("**Recommended treatment:**")) {
-      parsedData.treatment = section
-        .replace("**Recommended treatment:**", "")
-        .split(/\n/) // Split by newlines to handle each line separately
-        .filter((line) => line.trim() !== "") // Remove any empty lines
-        .map((line) => {
-          // Find the first dash and split at it, leaving "Over-the-counter" intact
-          const parts = line.split(/ - (.+)/); // Split on the first dash, capture the rest of the line
-          return parts.length > 1
-            ? {
-                heading: parts[0].trim(), // The part before the first dash
-                details: parts[1].trim(), // The part after the dash
-              }
-            : {
-                // Handle cases where no dash is found
-                heading: line.trim(),
-                details: "",
-              };
-        });
-    }
-
-    if (section.startsWith("**Note:**")) {
-      parsedData.note = section.replace("**Note:**", "").trim();
-    }
-  });
-
-  return parsedData;
+  // Use regex to split at each asterisk (*) that's at the beginning of a line or after a newline
+  return text
+    .split(/\n\*|\*/g) // Split on newline followed by asterisk or just an asterisk
+    .map((rec) => rec.trim()) // Remove leading/trailing whitespace
+    .filter((rec) => rec !== "") // Remove empty entries
+    .map((rec) => {
+      // Match bold headings (text between **)
+      const match = rec.match(/^\*\*(.*?)\*\*:\s*(.*)/);
+      return match
+        ? { heading: match[1], details: match[2] }
+        : { heading: "", details: rec }; // Handle cases without a bold heading
+    });
 }
 
 const PatientDetail = () => {
@@ -92,35 +54,20 @@ const PatientDetail = () => {
         <strong>Transcription:</strong> {patient.transcription}
       </p>
       <div className="recommendations">
-        <h3>Healing Recommendations</h3>
-        <div className="recommendation-content">
-          <h4>Possible Causes:</h4>
-          <ol>
-            {parsedData.possibleCauses.map((cause, index) => (
-              <li key={index}>{cause}</li>
-            ))}
-          </ol>
-
-          <h4>Symptoms:</h4>
-          <ul>
-            {parsedData.symptoms.map((symptom, index) => (
-              <li key={index}>{symptom}</li>
-            ))}
-          </ul>
-
-          <h3>Recommended Treatment:</h3>
-          <ul>
-            {parsedData.treatment.map((item, index) => (
-              <li key={index}>
-                <strong>{item.heading}:</strong> {item.details}
-              </li>
-            ))}
-          </ul>
-
-          <p className="note">
-            <strong>Note:</strong> {parsedData.note}
-          </p>
-        </div>
+        <h3>Recommendations</h3>
+        <ul>
+          {parsedData.map((rec, index) => (
+            <li key={index}>
+              {rec.heading ? (
+                <>
+                  <strong>{rec.heading}:</strong> {rec.details}
+                </>
+              ) : (
+                rec.details
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
